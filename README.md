@@ -21,7 +21,7 @@ a. This is an example of what the output should look like for any new files in t
 sent 103568105 bytes  received 42 bytes  15933561.08 bytes/sec
 total size is 103555337  speedup is 1.00
 building file list ... done
->f+++++++ TAG207.mov
+\>f+++++++ TAG207.mov
 
 b. You can also open up finder and navigate to the CAS server. From there, manually that files have been transferred by clicking into the folders. 
 
