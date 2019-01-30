@@ -25,13 +25,28 @@ do
     fi 
 
     # rsync file to CAS
-    THE_SPOT=${FINAL_DIR}/TAG${SUBJECT_ID}/Wave\ ${WAVE}
+    THE_SPOT=${FINAL_DIR}/TAG${SUBJECT_ID}/Wave_${WAVE}
+    NOT_THE_SPOT=${FINAL_DIR}/TAG${SUBJECT_ID}/Wave\ ${WAVE} 
 
 	#if file directory structure doesn't exist, make it
+    
+    #echo "$NOT_THE_SPOT"
+    #echo "$THE_SPOT"
+
+    mv -v -i "$NOT_THE_SPOT" "$THE_SPOT" #
+
     if [ ! -d "$THE_SPOT" ]; then
-    	mkdir -p $THE_SPOT
+        mkdir -p $THE_SPOT
     fi
+    
+    #if the wrong file directory structure exists, then rename it (get rid of blank space between Wave and number)
+    #if [ -d "$NOT_THE_SPOT" ]; then
+    #    echo "$NOT_THE_SPOT"
+    #    echo "$THE_SPOT"
+        
+    #fi
     
     # rsync files to the correct location
     rsync -aiv ${file} "${THE_SPOT}"
+
 done
