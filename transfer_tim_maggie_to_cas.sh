@@ -19,17 +19,19 @@ do
     #parse filename to obtain WAVE
     WAVE=`echo $filename | awk 'BEGIN {FS="w|W"}{print $2}'` # if it begins with "w" or "W", print the part after
 
+	#if wave is an empty variable, it equals 1
     if [ -z $WAVE ]; then
     	WAVE=1
-    fi #if wave is an empty variable, it equals 1
-   
-    echo $WAVE
+    fi 
 
-    #if file directory structure doesn't exist, make it
+    # rsync file to CAS
+    THE_SPOT=${FINAL_DIR}/TAG${SUBJECT_ID}/Wave\ ${WAVE}
 
-    # mkdir -p
-    echo  $FINAL_DIR/
+	#if file directory structure doesn't exist, make it
+    if [ ! -d "$THE_SPOT" ]; then
+    	mkdir -p $THE_SPOT
+    fi
+    
     # rsync files to the correct location
-    #rsync -n -aiv -e $file $FINAL_DIR/SUBJ/WAVE
-
+    rsync -n -aiv ${file} "${THE_SPOT}"
 done
