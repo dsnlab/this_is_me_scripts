@@ -33,5 +33,5 @@ do
     fi
     
     # rsync files to the correct location
-    rsync -n -aiv ${file} "${THE_SPOT}"
+    rsync -aiv ${file} "${THE_SPOT}"
 done
