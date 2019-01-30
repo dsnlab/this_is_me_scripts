@@ -7,23 +7,29 @@ FINAL_DIR=/Volumes/psych-cog/dsnlab/TAG/behavior/This_Is_Me
 
 for file in $INITIAL_DIR/*
 do
-    #parse string to obtain SUBJECT ID
-
-    filename=`echo $file | sed 's/\/Users\/maggie\/Desktop\/TAG_TIM\/TAG//g' | sed 's/\..*//g'` 
-    # first sed: remove the beginning of the file structure
-    # second sed: a literal period and then any character any number of times
-    #echo $test
     
-    # next step: take the first three numbers of this:
-    echo $filename | awk 'BEGIN {FS="w|W"}{print $1}' # if it begins with a lowercase or uppercase W, print the part before the W
+    # parse file to get filename, i.e. remove directories
+    filename=`echo $file | sed 's/\/Users\/maggie\/Desktop\/TAG_TIM\/TAG//g' | sed 's/\..*//g'` 
+    # 1st sed: remove the beginning of the file structure
+    # 2nd sed: a literal period and then any character any number of times
+    
+    #parse filename to obtain SUBJECT ID
+    SUBJECT_ID=${filename:0:3}
 
-    #echo $SUBJECT_ID
+    #parse filename to obtain WAVE
+    WAVE=`echo $filename | awk 'BEGIN {FS="w|W"}{print $2}'` # if it begins with "w" or "W", print the part after
 
-    #parse string to obtain WAVE
+    if [ -z $WAVE ]; then
+    	WAVE=1
+    fi #if wave is an empty variable, it equals 1
+   
+    echo $WAVE
 
-    #echo $WAVE
+    #if file directory structure doesn't exist, make it
 
-    #make file directory structure
+    # mkdir -p
+    echo  $FINAL_DIR/
+    # rsync files to the correct location
     #rsync -n -aiv -e $file $FINAL_DIR/SUBJ/WAVE
 
 done
